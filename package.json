@@ -1,0 +1,27 @@
+{
+  "name": "sandbox",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+	"metrics":"cd node_modules/phantomas/bin/ && node phantomas.js --config=../../../phantomas.json >metrics.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bBlocks/sandbox.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bBlocks/sandbox/issues"
+  },
+  "homepage": "https://github.com/bBlocks/sandbox#readme",
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "jquery": "^3.2.1"
+  },
+  "devDependencies": {
+	"phantomas": "^1.19.0"
+  }
+}

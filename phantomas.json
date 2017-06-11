@@ -1,0 +1,7 @@
+{
+    "url": "file:///C:/Users/mike/projects/blocks/sandbox/jquery/index.html", 
+	"urlBack": "http://localhost:3000/js/index.html",
+    "progress": true,
+    "modules": "windowPerformance,timeToFirst,domComplexity,assetsTypes",
+	"reporter": "json:pretty"
+}
