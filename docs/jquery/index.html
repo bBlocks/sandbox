@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>JQuery</title>
+	<link href="../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+	<script src="../node_modules/jquery/dist/jquery.slim.min.js" defer></script>
+	<script src="../common.js" defer></script>
+	<script src="app.js" defer></script>
+</head>
+
+<body>
+	<nav class="navbar navbar-inverse">
+		<div class="container">
+			<div class="navbar-header">				
+				<a class="navbar-brand" href="../index.html">Sandbox</a>			
+				<ul class="nav navbar-nav">
+					<li><a href="../index.html">Home</a></li>
+					<li class="active"><a href="javascript:void(0)">JQuery</a></li>
+					<li><a href="../polymer/index.html">Polymer 1.x</a></li>
+					<li><a href="../xtag/index.html">X-Tag</a></li>
+					<li><a href="../bblocks/index.html">bBlocks</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<div class="container" role="main">
+		<h1 class="page-header">JQuery</h1>
+		<div class="container">
+			<form id="form">
+				<div class="form-group">
+					<label>Items count</label>
+					<input type="number" class="form-control" name="itemsCount" min="1" max="999999" value="1500" />
+				</div>
+				<div class="form-group">
+					<label>Page size</label>
+					<input type="number" class="form-control" name="pageSize" min="1" max="999999" value="150" />
+				</div>
+				<div class="form-group">
+					<label>Current page</label>
+					<input type="number" class="form-control" name="currentPage" min="1" max="999999" value="1" />
+				</div>
+				<div class="">
+					<button type="submit" class="btn btn-primary" id="showPage">Show page</button>
+				</div>
+			</form>
+		</div>
+		<br><br>
+		<div class="container">
+			<table class="table" id="table">
+				<thead>
+				</thead>
+				<tbody>
+				</tbody>
+			</table>
+		</div>
+		<footer class="footer">
+			<p id="version">v0.0.0</p>
+		</footer>
+	</div>
+</body>
+</html>

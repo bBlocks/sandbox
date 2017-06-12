@@ -1,0 +1,137 @@
+console.log('start building');
+
+const fs = require('fs-extra');
+
+
+function replaceAll(search, replacement) {
+    var target = this;
+    return target.split(search).join(replacement);
+};
+
+function replace(file, patterns) {
+	console.info('replace in file', file.src);
+	fs.readFile(file.src, 'utf8', function (err, data) {
+		if (err) {
+			return console.log(err);
+		}
+		let result = data;
+		let search; 
+		for(let i in patterns) {
+			let cfg = patterns[i];
+			if (cfg.reg) {
+				search = new RegExp(cfg.reg,'ig');
+				result = result.replace(search, cfg.rep);
+			} else {
+				search = cfg.src;
+				result = replaceAll.call(result, search, cfg.rep);
+			}		
+			console.log('replacing', search, cfg.rep, result.indexOf(search));
+			
+		}
+		//console.log(file.dist, result);
+		fs.writeFile(file.src, result, 'utf8', function (err) {
+			if (err) return console.log(err);
+		});
+	});
+	
+}
+
+function copy(file) {
+	var newName;
+	console.info('copying file', file.src);
+	file.dist = file.dist + file.src;
+	fs.copySync(file.src, file.dist);
+}
+
+
+var config = {
+	files: [
+		{
+			src: './node_modules/bootstrap/dist/css/bootstrap.min.css',
+			dist: './docs/lib/'
+		},
+		{
+			src: './node_modules/jquery/dist/jquery.slim.min.js',
+			dist: './docs/lib/jquery.slim.min.js'
+		},
+		{
+			src: './jquery/',
+			dist: './docs/',
+		},
+		{
+			src: './polymer/',
+			dist: './docs/',
+		},
+		{
+			src: './node_modules/webcomponents.js/webcomponents-lite.min.js',
+			dist: './docs/lib'
+		},
+		{
+			src: './node_modules/Polymer/polymer-micro.html',
+			dist: './docs/lib'
+		},
+		{
+			src: './bblocks/',
+			dist: './docs/',
+		},
+		{
+			src: './xtag/',
+			dist: './docs/',
+		},
+		{
+			src: './node_modules/x-tag/dist/x-tag-core.min.js',
+			dist: './docs/lib'
+		},
+		{
+			src: './index.html',
+			dist: './docs',
+		},
+		{
+			src: './common.js',
+			dist: './docs',
+		}
+
+	],
+	replace: [
+		{
+			src: './docs/jquery/index.html',
+		},
+		{
+			src: './docs/xtag/index.html',
+		},
+		{
+			src: './docs/polymer/index.html',
+		},
+		{
+			src: './docs/bblocks/index.html',
+		},
+		{
+			src: './docs/index.html',
+		}
+	],
+	patterns: [
+
+		{src: '../node_modules/', rep: 'lib/'},
+		{src: 'node_modules/', rep: 'lib/'},
+		{src: 'bootstrap/dist/css/', rep: ''},
+		{src: 'jquery/dist/', rep: ''},
+		{src: 'x-tag/dist/', rep: ''},
+		{src: 'Polymer/', rep: ''},
+		{src: 'webcomponents.js/', rep: ''}
+	]
+};
+let i;
+fs.ensureDir('./docs');
+fs.ensureDir('./docs/jquery');
+fs.ensureDir('./docs/lib');
+fs.ensureDir('./docs/polymer');
+fs.ensureDir('./docs/xtag');
+fs.ensureDir('./docs/bblocks');
+
+for (i in config.files) {
+	copy(config.files[i]);
+}
+
+for(i in config.replace) {
+	//replace(config.replace[i], config.replace[i].patterns || config.patterns);
+}

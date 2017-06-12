@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "metrics": "cd node_modules/phantomas/bin/ && node phantomas.js --config=../../../phantomas.json >../../../metrics.json",
-    "server": "http-server ./ -p 3000"
+    "server": "http-server ./ -p 3000",
+	"build": "node build.js"
   },
   "repository": {
     "type": "git",
@@ -26,6 +27,7 @@
     "x-tag": "^1.5.11"
   },
   "devDependencies": {
+    "fs-extra": "^3.0.1",
     "http-server": "^0.10.0",
     "phantomas": "^1.19.0"
   }
