@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-	"metrics":"cd node_modules/phantomas/bin/ && node phantomas.js --config=../../../phantomas.json >metrics.json"
+    "metrics": "cd node_modules/phantomas/bin/ && node phantomas.js --config=../../../phantomas.json >../../../metrics.json",
+    "server": "http-server ./ -p 3000"
   },
   "repository": {
     "type": "git",
@@ -18,10 +19,14 @@
   },
   "homepage": "https://github.com/bBlocks/sandbox#readme",
   "dependencies": {
+    "Polymer": "^1.6.1--",
     "bootstrap": "^3.3.7",
-    "jquery": "^3.2.1"
+    "jquery": "^3.2.1",
+    "webcomponents.js": "^0.7.24",
+    "x-tag": "^1.5.11"
   },
   "devDependencies": {
-	"phantomas": "^1.19.0"
+    "http-server": "^0.10.0",
+    "phantomas": "^1.19.0"
   }
 }

@@ -34,7 +34,7 @@ $.fn.table = function (params) {
 		currentParams = $.extend(null, params);
 
 	$table.on('update', function (event, newParams) {
-		// Detect if we need to refresh data
+		// Detect if we need to refresh table with new data
 		if (!currentParams) {refreshTable(newParams);return;}
 		if (currentParams.itemsCount != newParams.itemsCount) {refreshTable(newParams);return;}
 		if (currentParams.pageSize != newParams.pageSize) {refreshTable(newParams);return;}
@@ -81,12 +81,12 @@ $.fn.table = function (params) {
 
 // Cell component
 $.fn.cell = function(rowIndex, columnIndex, data, isHead) {
-	var $span = $('<span>'); // Need to create a new DOM element to make it fare
+	var $span = $('<span>'); // Need to create a new DOM element to make it fare :)
 	$span.html(isHead ? headText(rowIndex, columnIndex, data) : cellText(rowIndex, columnIndex, data));
 	$(this).append($span);
 };
 
-// DOM ready
+// Page logic
 $(function () {
 	$('#form').form(params);
 	$('#table').table();

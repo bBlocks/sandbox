@@ -1,143 +1,78 @@
-00:32:58.747: phantomas v1.19.0: C:/Users/mike/projects/blocks/sandbox/node_modules/phantomas/
-00:32:58.747: Options: {"log":"../../../metrics.json","modules":"windowPerformance,timeToFirst,domComplexity,assetsTypes","urlBack":"http://localhost:3000/js/index.html","format":"plain","R":"plain","reporter":"json:pretty","timeout":15,"ssl-protocol":"any","debug":"false","silent":false,"progress":true,"page-source":false,"film-strip":false,"colors":false,"analyze-css":false,"stop-at-onload":false,"spy-eval":false,"scroll":false,"no-externals":false,"disable-js":false,"v":false,"verbose":false,"h":false,"help":false,"V":false,"version":false,"url":"file:///C:/Users/mike/projects/blocks/sandbox/jquery/index.html","user-agent":"phantomas/1.19.0 (PhantomJS/2.1.1; win32 x64)"}
-00:32:58.749: Loading: core modules...
-00:32:58.750: Core module navigationTiming v1.0 initialized
-00:32:58.755: Core module requestsMonitor v1.2 initialized
-00:32:58.756: Core module timeToFirstByte v1.1 initialized
-00:32:58.756: Loading: extensions...
-00:32:58.756: Getting the list of all modules in C:/Users/mike/projects/blocks/sandbox/node_modules/phantomas/extensions...
-00:32:58.758: Module cookies v1.2 initialized
-00:32:58.759: Devices: no profile selected (available: phone, tablet)
-00:32:58.759: Module devices v0.1 initialized
-00:32:58.760: filmStrip: to enable screenshots of page being loaded run phantomas with --film-strip option
-00:32:58.760: Module filmStrip v0.3 initialized
-00:32:58.761: HAR: no path specified, use --har <path>
-00:32:58.761: Module har v0.1 initialized
-00:32:58.762: Module httpAuth v1.0 initialized
-00:32:58.762: To enable page-source of page being loaded run phantomas with --page-source option
-00:32:58.763: Module pageSource v0.1 initialized
-00:32:58.763: Module postLoadDelay v0.1 initialized
-00:32:58.764: Screenshot: to enable screenshot of the fully loaded page run phantomas with --screenshot option
-00:32:58.764: Module screenshot v0.2 initialized
-00:32:58.765: Scroll: pass --scroll option to scroll down the page when it's loaded
-00:32:58.765: Module scroll v0.1 initialized
-00:32:58.765: Module waitForEvent v0.1 initialized
-00:32:58.766: Module waitForSelector v0.2 initialized
-00:32:58.766: Loading: modules...
-00:32:58.767: Module windowPerformance v1.0 initialized
-00:32:58.768: Module timeToFirst v0.1 initialized
-00:32:58.770: Module domComplexity v1.0 initialized
-00:32:58.770: Module assetsTypes v1.0 initialized
-00:32:58.771: Loading: 3rd party modules...
-00:32:58.772: Opening <file:///C:/Users/mike/projects/blocks/sandbox/jquery/index.html>...
-00:32:58.772: Using phantomas/1.19.0 (PhantomJS/2.1.1; win32 x64) as user agent
-00:32:58.772: Viewport set to 1366 x 768
-00:32:58.773: Event pageBeforeOpen emitted
-00:32:58.774: Event onResourceRequested emitted
-00:32:58.775: Event beforeSend emitted
-00:32:58.775: req: <file:///C:/Users/mike/projects/blocks/sandbox/jquery/index.html>
-00:32:58.775: Event send emitted
-00:32:58.776: Event pageOpen emitted
-00:32:58.776: Timeout set to 15 sec
-00:32:58.777: Page loading started
-00:32:58.777: Event loadStarted emitted
-00:32:58.777: Event onResourceReceived emitted
-00:32:58.778: Got a response with no status or URL set: <file:///C:/Users/mike/projects/blocks/sandbox/jquery/index.html> ({"body":"","bodySize":1847,"contentType":null,"headers":[{"name":"Last-Modified","value":"Sat, 10 Jun 2017 18:23:44 GMT"},{"name":"Content-Length","value":"1847"}],"id":1,"redirectURL":null,"stage":"start","status":null,"statusText":null,"time":"2017-06-11T00:32:58.780Z","url":"file:///C:/Users/mike/projects/blocks/sandbox/jquery/index.html"})
-00:32:58.778: Event abort emitted
-00:32:58.780: Event onResourceRequested emitted
-00:32:58.781: Event beforeSend emitted
-00:32:58.781: req: <file:///C:/Users/mike/projects/blocks/sandbox/node_modules/bootstrap/dist/css/bootstrap.min.css>
-00:32:58.781: Event send emitted
-00:32:58.781: Event onResourceRequested emitted
-00:32:58.781: Event beforeSend emitted
-00:32:58.782: req: <file:///C:/Users/mike/projects/blocks/sandbox/node_modules/jquery/dist/jquery.slim.min.js>
-00:32:58.782: Event send emitted
-00:32:58.782: Event onResourceRequested emitted
-00:32:58.782: Event beforeSend emitted
-00:32:58.782: req: <file:///C:/Users/mike/projects/blocks/sandbox/common.js>
-00:32:58.783: Event send emitted
-00:32:58.783: Event onResourceRequested emitted
-00:32:58.783: Event beforeSend emitted
-00:32:58.783: req: <file:///C:/Users/mike/projects/blocks/sandbox/jquery/app.js>
-00:32:58.783: Event send emitted
-00:32:58.784: Event onResourceReceived emitted
-00:32:58.784: Got a response with no status or URL set: <file:///C:/Users/mike/projects/blocks/sandbox/jquery/index.html> ({"contentType":null,"headers":[{"name":"Last-Modified","value":"Sat, 10 Jun 2017 18:23:44 GMT"},{"name":"Content-Length","value":"1847"}],"id":1,"redirectURL":null,"stage":"end","status":null,"statusText":null,"time":"2017-06-11T00:32:58.780Z","url":"file:///C:/Users/mike/projects/blocks/sandbox/jquery/index.html"})
-00:32:58.784: Event abort emitted
-00:32:58.785: recv: HTTP 200 <file:///C:/Users/mike/projects/blocks/sandbox/jquery/index.html> [undefined]
-00:32:58.785: Event recv emitted
-00:32:58.785: Event metric emitted
-00:32:58.785: Event metric emitted
-00:32:58.786: Time to first byte: set to 10 ms for #1 request to <file:///C:/Users/mike/projects/blocks/sandbox/jquery/index.html> (HTTP 200)
-00:32:58.786: Time to last byte: set to 10 ms
-00:32:58.786: Event responseEnd emitted
-00:32:58.786: Performance timing: responseEnd = 1497141178786
-00:32:58.786: Event milestone emitted
-00:32:58.787: Event onResourceReceived emitted
-00:32:58.787: Got a response with no status or URL set: <file:///C:/Users/mike/projects/blocks/sandbox/node_modules/bootstrap/dist/css/bootstrap.min.css> ({"body":"","bodySize":121200,"contentType":null,"headers":[{"name":"Last-Modified","value":"Sat, 10 Jun 2017 12:44:06 GMT"},{"name":"Content-Length","value":"121200"}],"id":2,"redirectURL":null,"stage":"start","status":null,"statusText":null,"time":"2017-06-11T00:32:58.790Z","url":"file:///C:/Users/mike/projects/blocks/sandbox/node_modules/bootstrap/dist/css/bootstrap.min.css"})
-00:32:58.787: Event abort emitted
-00:32:58.787: Event onResourceReceived emitted
-00:32:58.787: Got a response with no status or URL set: <file:///C:/Users/mike/projects/blocks/sandbox/node_modules/bootstrap/dist/css/bootstrap.min.css> ({"contentType":null,"headers":[{"name":"Last-Modified","value":"Sat, 10 Jun 2017 12:44:06 GMT"},{"name":"Content-Length","value":"121200"}],"id":2,"redirectURL":null,"stage":"end","status":null,"statusText":null,"time":"2017-06-11T00:32:58.790Z","url":"file:///C:/Users/mike/projects/blocks/sandbox/node_modules/bootstrap/dist/css/bootstrap.min.css"})
-00:32:58.787: Event abort emitted
-00:32:58.788: recv: HTTP 200 <file:///C:/Users/mike/projects/blocks/sandbox/node_modules/bootstrap/dist/css/bootstrap.min.css> [undefined]
-00:32:58.788: Event recv emitted
-00:32:58.799: Event onResourceReceived emitted
-00:32:58.799: Got a response with no status or URL set: <file:///C:/Users/mike/projects/blocks/sandbox/node_modules/jquery/dist/jquery.slim.min.js> ({"body":"","bodySize":69597,"contentType":null,"headers":[{"name":"Last-Modified","value":"Sat, 10 Jun 2017 12:40:35 GMT"},{"name":"Content-Length","value":"69597"}],"id":3,"redirectURL":null,"stage":"start","status":null,"statusText":null,"time":"2017-06-11T00:32:58.800Z","url":"file:///C:/Users/mike/projects/blocks/sandbox/node_modules/jquery/dist/jquery.slim.min.js"})
-00:32:58.799: Event abort emitted
-00:32:58.799: Event onResourceReceived emitted
-00:32:58.799: Got a response with no status or URL set: <file:///C:/Users/mike/projects/blocks/sandbox/node_modules/jquery/dist/jquery.slim.min.js> ({"contentType":null,"headers":[{"name":"Last-Modified","value":"Sat, 10 Jun 2017 12:40:35 GMT"},{"name":"Content-Length","value":"69597"}],"id":3,"redirectURL":null,"stage":"end","status":null,"statusText":null,"time":"2017-06-11T00:32:58.800Z","url":"file:///C:/Users/mike/projects/blocks/sandbox/node_modules/jquery/dist/jquery.slim.min.js"})
-00:32:58.799: Event abort emitted
-00:32:58.800: recv: HTTP 200 <file:///C:/Users/mike/projects/blocks/sandbox/node_modules/jquery/dist/jquery.slim.min.js> [undefined]
-00:32:58.800: Event recv emitted
-00:32:58.802: phantomas scope injected
-00:32:58.802: onInit: page object initialized
-00:32:58.802: Event init emitted
-00:32:58.803: Spying disabled - installing window.performance metrics
-00:32:58.803: Performance timing: using native window.performance
-00:32:58.803: Spying enabled
-00:32:58.816: Event onResourceReceived emitted
-00:32:58.816: Got a response with no status or URL set: <file:///C:/Users/mike/projects/blocks/sandbox/common.js> ({"body":"","bodySize":989,"contentType":null,"headers":[{"name":"Last-Modified","value":"Sat, 10 Jun 2017 19:08:27 GMT"},{"name":"Content-Length","value":"989"}],"id":4,"redirectURL":null,"stage":"start","status":null,"statusText":null,"time":"2017-06-11T00:32:58.821Z","url":"file:///C:/Users/mike/projects/blocks/sandbox/common.js"})
-00:32:58.816: Event abort emitted
-00:32:58.816: Event onResourceReceived emitted
-00:32:58.816: Got a response with no status or URL set: <file:///C:/Users/mike/projects/blocks/sandbox/common.js> ({"contentType":null,"headers":[{"name":"Last-Modified","value":"Sat, 10 Jun 2017 19:08:27 GMT"},{"name":"Content-Length","value":"989"}],"id":4,"redirectURL":null,"stage":"end","status":null,"statusText":null,"time":"2017-06-11T00:32:58.821Z","url":"file:///C:/Users/mike/projects/blocks/sandbox/common.js"})
-00:32:58.816: Event abort emitted
-00:32:58.817: recv: HTTP 200 <file:///C:/Users/mike/projects/blocks/sandbox/common.js> [undefined]
-00:32:58.817: Event recv emitted
-00:32:58.817: Event onResourceReceived emitted
-00:32:58.817: Got a response with no status or URL set: <file:///C:/Users/mike/projects/blocks/sandbox/jquery/app.js> ({"body":"","bodySize":2455,"contentType":null,"headers":[{"name":"Last-Modified","value":"Sat, 10 Jun 2017 19:03:33 GMT"},{"name":"Content-Length","value":"2455"}],"id":5,"redirectURL":null,"stage":"start","status":null,"statusText":null,"time":"2017-06-11T00:32:58.821Z","url":"file:///C:/Users/mike/projects/blocks/sandbox/jquery/app.js"})
-00:32:58.817: Event abort emitted
-00:32:58.818: Event onResourceReceived emitted
-00:32:58.818: Got a response with no status or URL set: <file:///C:/Users/mike/projects/blocks/sandbox/jquery/app.js> ({"contentType":null,"headers":[{"name":"Last-Modified","value":"Sat, 10 Jun 2017 19:03:33 GMT"},{"name":"Content-Length","value":"2455"}],"id":5,"redirectURL":null,"stage":"end","status":null,"statusText":null,"time":"2017-06-11T00:32:58.821Z","url":"file:///C:/Users/mike/projects/blocks/sandbox/jquery/app.js"})
-00:32:58.818: Event abort emitted
-00:32:58.818: recv: HTTP 200 <file:///C:/Users/mike/projects/blocks/sandbox/jquery/app.js> [undefined]
-00:32:58.818: Event recv emitted
-00:32:58.819: Navigation Timing milestone: domReady
-00:32:58.819: Event milestone emitted
-00:32:58.819: Event metric emitted
-00:32:58.820: Performance timing: document reached "DOMContentLoaded" state after 33 ms
-00:32:58.820: Navigation Timing milestone: domComplete
-00:32:58.820: Event milestone emitted
-00:32:58.820: Performance timing: {"connectStart":1497141178773,"navigationStart":1497141178773,"secureConnectionStart":0,"fetchStart":1497141178773,"domContentLoadedEventStart":1497141178819,"responseStart":1497141178773,"domInteractive":1497141178787,"domainLookupEnd":1497141178773,"redirectStart":0,"requestStart":1497141178773,"unloadEventEnd":0,"unloadEventStart":0,"domComplete":1497141178820,"domainLookupStart":1497141178773,"loadEventStart":0,"domContentLoadedEventEnd":1497141178820,"redirectEnd":0,"connectEnd":1497141178773,"responseEnd":1497141178778,"domLoading":1497141178779,"loadEventEnd":0}
-00:32:58.820: Event metric emitted
-00:32:58.820: Performance timing: document reached "complete" state after 42 ms
-00:32:58.823: Event metric emitted
-00:32:58.823: Performance timing: document reached "DOMContentLoadedEnd" state after 42 ms
-00:32:58.823: Page loading finished ("success")
-00:32:58.823: Event loadFinished emitted
-00:32:58.824: Loading progress: 100%
-00:32:58.824: Event progress emitted
-00:32:59.795: Event report emitted
-00:32:59.795: Performance timing: backend vs frontend time - 19% / 81%
-00:32:59.796: Event metric emitted
-00:32:59.799: Event domId emitted
-00:32:59.800: Event domId emitted
-00:32:59.800: Event domId emitted
-00:32:59.801: Spying disabled - counting iframes
-00:32:59.801: Spying enabled
-00:32:59.802: phantomas run for <file:///C:/Users/mike/projects/blocks/sandbox/jquery/index.html> completed in 1031 ms
-00:32:59.802: Event results emitted
-00:32:59.802: Returning results with 48 metric(s)...
-00:32:59.803: Event json emitted
-00:32:59.803: Done!
-00:32:59.803: Event exit emitted
-00:32:59.804: onInit: was already triggered for <file:///C:/Users/mike/projects/blocks/sandbox/jquery/index.html>
-00:32:59.804: onInit: webpage.url is about:blank, ignoring
+{
+  "generator": "phantomas v1.19.0",
+  "url": "http://localhost:3000/jquery/index.html",
+  "metrics": {
+    "requests": 5,
+    "gzipRequests": 0,
+    "postRequests": 0,
+    "httpsRequests": 0,
+    "notFound": 0,
+    "bodySize": 122221,
+    "contentLength": 196701,
+    "httpTrafficCompleted": 393,
+    "timeToFirstByte": 352,
+    "timeToLastByte": 357,
+    "domInteractive": 0,
+    "domContentLoaded": 54,
+    "domContentLoadedEnd": 60,
+    "domComplete": 60,
+    "timeBackend": 85,
+    "timeFrontend": 15,
+    "timeToFirstCss": 366,
+    "timeToFirstJs": 380,
+    "timeToFirstImage": 0,
+    "commentsSize": 0,
+    "whiteSpacesSize": 194,
+    "DOMelementsCount": 30,
+    "DOMelementMaxDepth": 6,
+    "nodesWithInlineCSS": 0,
+    "imagesScaledDown": 0,
+    "imagesWithoutDimensions": 0,
+    "DOMidDuplicated": 0,
+    "htmlCount": 1,
+    "htmlSize": 1817,
+    "cssCount": 1,
+    "cssSize": 121200,
+    "jsCount": 3,
+    "jsSize": 73684,
+    "jsonCount": 0,
+    "jsonSize": 0,
+    "imageCount": 0,
+    "imageSize": 0,
+    "videoCount": 0,
+    "videoSize": 0,
+    "webfontCount": 0,
+    "webfontSize": 0,
+    "base64Count": 0,
+    "base64Size": 0,
+    "otherCount": 0,
+    "otherSize": 0,
+    "requestsWithTimeout": 0,
+    "bodyHTMLSize": 1266,
+    "iframesCount": 0
+  },
+  "offenders": {
+    "timeToFirstCss": [
+      "http://localhost:3000/node_modules/bootstrap/dist/css/bootstrap.min.css received in 366 ms"
+    ],
+    "timeToFirstJs": [
+      "http://localhost:3000/common.js received in 380 ms"
+    ],
+    "DOMelementMaxDepth": [
+      "body > nav.navbar.navbar-inverse > div.container > div.navbar-header > ul.nav.navbar-nav > li[0] > a[0]",
+      "body > nav.navbar.navbar-inverse > div.container > div.navbar-header > ul.nav.navbar-nav > li.active > a[0]"
+    ],
+    "htmlCount": [
+      "http://localhost:3000/jquery/index.html (size: 1.77 kB, latency: 352 ms)"
+    ],
+    "cssCount": [
+      "http://localhost:3000/node_modules/bootstrap/dist/css/bootstrap.min.css (size: 118.36 kB, latency: 25 ms)"
+    ],
+    "jsCount": [
+      "http://localhost:3000/common.js (size: 1.40 kB, latency: 37 ms)",
+      "http://localhost:3000/jquery/app.js (size: 2.59 kB, latency: 37 ms)",
+      "http://localhost:3000/node_modules/jquery/dist/jquery.slim.min.js (size: 67.97 kB, latency: 40 ms)"
+    ]
+  },
+  "asserts": false
+}

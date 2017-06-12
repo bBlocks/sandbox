@@ -1,8 +1,8 @@
+<script>
 // Form component
-bb.helpers.defineElement = bb.helpers.registerElement; // enforce v0 spec polyfill
-var formComponent = bb.component({
-	tag: 'form',
-	is: 'bb-form',
+var formComponent = Polymer({
+	is: 'poly-form',
+	extends: 'form',
 	update: function (params) {
 		var fields = this.querySelectorAll('input');
 		// Set field values
@@ -10,8 +10,9 @@ var formComponent = bb.component({
 		fields[1].value = params.pageSize;
 		fields[2].value = params.currentPage;
 	},
-	events: {
-		submit: function (event) {
+	created: function () {
+		console.log('created', this);
+		this.addEventListener('submit', function (event) {
 			event.preventDefault();
 			startMeasure('render');
 			// Get new parameters
@@ -26,27 +27,28 @@ var formComponent = bb.component({
 			var event = new CustomEvent('update', { detail: newParams });
 			var table = document.querySelector('#table');
 			table.dispatchEvent(event);
-		}
+		});
 	}
 });
 
 // Table component
-var tableComponent = bb.component({
-	is: 'bb-table',
-	tag: 'table',
+var tableComponent = Polymer({
+	is: 'poly-table',
+	extends: 'table',
 	currentParams: null,
 	thead: null,
 	tbody: null,
-	events: {
-		update: function (event) {
+	created: function() {
+		this.addEventListener('update', function (event) {
 			var newParams = event.detail;
 			// Detect if we need to refresh data
 			if (!this.currentParams) { this.refreshTable(newParams); return; }
 			if (this.currentParams.itemsCount != newParams.itemsCount) { this.refreshTable(newParams); return; }
 			if (this.currentParams.pageSize != newParams.pageSize) { this.refreshTable(newParams); return; }
 			if (this.currentParams.currentPage != newParams.currentPage) { this.refreshTable(newParams); return; }
-		}
+		});
 	},
+
 	// Clear node
 	empty: function (element) {
 		element = element || this;
@@ -55,7 +57,8 @@ var tableComponent = bb.component({
 	// Get the data and render the table
 	refreshTable: function (newParams) {
 		this.currentParams = this.currentParams || {};
-		Object.assign(this.currentParams, newParams);
+		// Can't use object assign 
+		this.currentParams = Object.create(newParams);
 		var data = generateData(this.currentParams.currentPage, this.currentParams.pageSize, this.currentParams.itemsCount);
 		this.renderTable(data);
 	},
@@ -78,11 +81,11 @@ var tableComponent = bb.component({
 				j++;
 				if (i == 0) { // Create table head
 					th = document.createElement('th');
-					th.innerHTML = '<bb-cell row="' + i + '" col="' + j + '" head></bb-cell>'; // Use cell component
+					th.innerHTML = '<poly-cell row="' + i + '" col="' + j + '" head></bb-cell>'; // Use cell component
 					headRow.appendChild(th);
 				}
 				td = document.createElement('td');
-				td.innerHTML = '<bb-cell row="' + i + '" col="' + j + '"></bb-cell>'; // Use cell component 
+				td.innerHTML = '<poly-cell row="' + i + '" col="' + j + '"></bb-cell>'; // Use cell component 
 				row.appendChild(td);
 			}
 			this.tbody.appendChild(row);
@@ -93,18 +96,20 @@ var tableComponent = bb.component({
 });
 
 // Cell component
-var cellComponent = bb.component({
-	is: 'bb-cell',
-	attachedCallback: function () { // attachedCallback when we use v0 spec
-	//connectedCallback: function () { // connectedCallback for v1 spec
+var cellComponent = Polymer({
+	is: 'poly-cell',
+	attached: function () { 
 		var rowIndex = Number(this.getAttribute('row') || 0) + 1;
 		var columnIndex = this.getAttribute('col');
 		var isHead = this.getAttribute('head') != null;
 		this.innerHTML = isHead ? headText(rowIndex, columnIndex) : cellText(rowIndex, columnIndex);
-	},
+	}
 });
 
 // Page logic
-var form = document.querySelector('#form');
-form.update(params);
-var table = document.querySelector('#table');
+window.addEventListener('WebComponentsReady', function () {
+	var form = document.querySelector('#form');
+	form.update(params);
+	var table = document.querySelector('#table');
+});
+</script>
