@@ -39,7 +39,6 @@ function replace(file, patterns) {
 function copy(file) {
 	var newName;
 	console.info('copying file', file.src);
-	file.dist = file.dist + file.src;
 	fs.copySync(file.src, file.dist);
 }
 
@@ -48,7 +47,7 @@ var config = {
 	files: [
 		{
 			src: './node_modules/bootstrap/dist/css/bootstrap.min.css',
-			dist: './docs/lib/'
+			dist: './docs/lib/bootstrap.min.css'
 		},
 		{
 			src: './node_modules/jquery/dist/jquery.slim.min.js',
@@ -56,39 +55,39 @@ var config = {
 		},
 		{
 			src: './jquery/',
-			dist: './docs/',
+			dist: './docs/jquery',
 		},
 		{
 			src: './polymer/',
-			dist: './docs/',
+			dist: './docs/polymer',
 		},
 		{
 			src: './node_modules/webcomponents.js/webcomponents-lite.min.js',
-			dist: './docs/lib'
+			dist: './docs/lib/webcomponents-lite.min.js'
 		},
 		{
 			src: './node_modules/Polymer/polymer-micro.html',
-			dist: './docs/lib'
+			dist: './docs/lib/polymer-micro.html'
 		},
 		{
 			src: './bblocks/',
-			dist: './docs/',
+			dist: './docs/bblocks',
 		},
 		{
 			src: './xtag/',
-			dist: './docs/',
+			dist: './docs/xtag',
 		},
 		{
 			src: './node_modules/x-tag/dist/x-tag-core.min.js',
-			dist: './docs/lib'
+			dist: './docs/lib/x-tag-core.min.js'
 		},
 		{
 			src: './index.html',
-			dist: './docs',
+			dist: './docs/index.html',
 		},
 		{
 			src: './common.js',
-			dist: './docs',
+			dist: './docs/common.js',
 		}
 
 	],
@@ -110,8 +109,7 @@ var config = {
 		}
 	],
 	patterns: [
-
-		{src: '../node_modules/', rep: 'lib/'},
+		{src: '../node_modules/', rep: '../lib/'},
 		{src: 'node_modules/', rep: 'lib/'},
 		{src: 'bootstrap/dist/css/', rep: ''},
 		{src: 'jquery/dist/', rep: ''},
@@ -121,17 +119,18 @@ var config = {
 	]
 };
 let i;
-fs.ensureDir('./docs');
-fs.ensureDir('./docs/jquery');
-fs.ensureDir('./docs/lib');
-fs.ensureDir('./docs/polymer');
-fs.ensureDir('./docs/xtag');
-fs.ensureDir('./docs/bblocks');
+fs.removeSync('./docs');
+fs.ensureDirSync('./docs');
+fs.ensureDirSync('./docs/jquery');
+fs.ensureDirSync('./docs/lib');
+fs.ensureDirSync('./docs/polymer');
+fs.ensureDirSync('./docs/xtag');
+fs.ensureDirSync('./docs/bblocks');
 
 for (i in config.files) {
 	copy(config.files[i]);
 }
 
 for(i in config.replace) {
-	//replace(config.replace[i], config.replace[i].patterns || config.patterns);
+	replace(config.replace[i], config.replace[i].patterns || config.patterns);
 }
