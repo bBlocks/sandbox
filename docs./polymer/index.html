@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" manifest="../app.cache">
 
 <head>
 	<meta charset="utf-8">
@@ -7,10 +7,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Polymer v1.x</title>
 	<link href="../lib/bootstrap.min.css" rel="stylesheet">
-	<script src="../lib/webcomponents-lite.min.js"></script>
-	<link rel="import" href="../lib/polymer-micro.html">
+	<link href="../style.css" rel="stylesheet">
 	<script src="../common.js" defer></script>
-	<link rel="import" href="app.html">
 </head>
 
 <body>
@@ -28,7 +26,7 @@
 			</div>
 		</div>
 	</nav>
-	<div class="container" role="main">
+	<div class="container" role="main" id="metricsContainer">
 		<h1 class="page-header">Polymer v1.x</h1>
 		<div class="container">
 			<form id="form" is="poly-form">
@@ -59,9 +57,11 @@
 			</table>
 		</div>
 		<footer class="footer">
-			<p id="version">v0.0.0</p>
+			v0.0.1
 		</footer>
 	</div>
-	
+	<script src="../lib/webcomponents-lite.min.js"></script>
+	<link rel="import" href="../lib/polymer-micro.html">
+	<link rel="import" href="app.html">
 </body>
 </html>

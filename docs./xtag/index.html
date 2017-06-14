@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" manifest="../app.cache">
 
 <head>
 	<meta charset="utf-8">
@@ -7,6 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>X-Tag</title>
 	<link href="../lib/bootstrap.min.css" rel="stylesheet">
+	<link href="../style.css" rel="stylesheet">
 	<script src="../lib/x-tag-core.min.js" defer></script>
 	<script src="../common.js" defer></script>
 	<script src="app.js" defer></script>
@@ -27,10 +28,10 @@
 			</div>
 		</div>
 	</nav>
-	<div class="container" role="main">
+	<div class="container" role="main" id="metricsContainer">
 		<h1 class="page-header">X-Tag</h1>
 		<div class="container">
-			<form id="form" is="bb-form">
+			<form id="form" is="x-form">
 				<div class="form-group">
 					<label>Items count</label>
 					<input type="number" class="form-control" name="itemsCount" min="1" max="999999" value="1500" />
@@ -50,7 +51,7 @@
 		</div>
 		<br><br>
 		<div class="container">
-			<table class="table" id="table" is="bb-table">
+			<table class="table" id="table" is="x-table">
 				<thead>
 				</thead>
 				<tbody>
@@ -58,7 +59,7 @@
 			</table>
 		</div>
 		<footer class="footer">
-			<p id="version">v0.0.0</p>
+			v0.0.1
 		</footer>
 	</div>
 </body>

@@ -7,6 +7,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Sandbox</title>
 	<link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link href="style.css" rel="stylesheet">
+	<script src="common.js" defer></script>
 </head>
 
 <body>
@@ -38,13 +40,16 @@
 			<li><a href="bblocks/index.html">bBlocks</a></li>
 		</ul>
 		<h2>Latest results</h2>
-		<table class="table">
-	
-		</table>
+		<div id="metricsContainer" class="allMetrics">
+		</div>
+		<button id="resetMetrics" class="btn btn-default">Reset</button> <button id="getMetrics" class="btn btn-default">Collect metrics</button>
 		<footer class="footer">
 			<p id="version">v0.0.0</p>
 		</footer>
 	</div>
+	<script>
+		var domain = ''; // required for metrics
+	</script>
 </body>
 
 </html>

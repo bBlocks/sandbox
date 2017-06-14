@@ -1,13 +1,15 @@
+var domain = 'jquery'; // required for metrics
+
 // Form component
 $.fn.form = function (params) {
 	var $form = $(this),
 		form = $form[0],
 		fields = form.elements;
 
-	// Stop page reload when form submitted
+	// Handle submit
 	$form.on('submit', function () {
 		startMeasure('render'); 
-		event.preventDefault();
+		event.preventDefault(); // Stop page reload when form submitted
 
 		var newParams = {
 			itemsCount: Number(fields.itemsCount.value),

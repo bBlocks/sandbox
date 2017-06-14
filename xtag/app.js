@@ -1,3 +1,4 @@
+var domain = 'xtag'; // required for metrics
 // Form component
 var formComponent = xtag.register('x-form', {
 	extends: 'form',
@@ -107,5 +108,4 @@ var cellComponent = xtag.register('x-cell', {
 // Page logic
 var form = document.querySelector('#form');
 form.update(params); // Fails in IE11
-console.log(form);
 var table = document.querySelector('#table');

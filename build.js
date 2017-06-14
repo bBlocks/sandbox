@@ -4,8 +4,8 @@ const fs = require('fs-extra');
 
 
 function replaceAll(search, replacement) {
-    var target = this;
-    return target.split(search).join(replacement);
+	var target = this;
+	return target.split(search).join(replacement);
 };
 
 function replace(file, patterns) {
@@ -15,25 +15,24 @@ function replace(file, patterns) {
 			return console.log(err);
 		}
 		let result = data;
-		let search; 
-		for(let i in patterns) {
+		let search;
+		for (let i in patterns) {
 			let cfg = patterns[i];
 			if (cfg.reg) {
-				search = new RegExp(cfg.reg,'ig');
+				search = new RegExp(cfg.reg, 'ig');
 				result = result.replace(search, cfg.rep);
 			} else {
 				search = cfg.src;
 				result = replaceAll.call(result, search, cfg.rep);
-			}		
+			}
 			console.log('replacing', search, cfg.rep, result.indexOf(search));
-			
 		}
 		//console.log(file.dist, result);
 		fs.writeFile(file.src, result, 'utf8', function (err) {
 			if (err) return console.log(err);
 		});
 	});
-	
+
 }
 
 function copy(file) {
@@ -41,7 +40,6 @@ function copy(file) {
 	console.info('copying file', file.src);
 	fs.copySync(file.src, file.dist);
 }
-
 
 var config = {
 	files: [
@@ -88,6 +86,14 @@ var config = {
 		{
 			src: './common.js',
 			dist: './docs/common.js',
+		},
+		{
+			src: './app.cache',
+			dist: './docs/app.cache',
+		},
+		{
+			src: './style.css',
+			dist: './docs/style.css',
 		}
 
 	],
@@ -109,13 +115,14 @@ var config = {
 		}
 	],
 	patterns: [
-		{src: '../node_modules/', rep: '../lib/'},
-		{src: 'node_modules/', rep: 'lib/'},
-		{src: 'bootstrap/dist/css/', rep: ''},
-		{src: 'jquery/dist/', rep: ''},
-		{src: 'x-tag/dist/', rep: ''},
-		{src: 'Polymer/', rep: ''},
-		{src: 'webcomponents.js/', rep: ''}
+		{ src: '../node_modules/', rep: '../lib/' },
+		{ src: 'node_modules/', rep: 'lib/' },
+		{ src: 'bootstrap/dist/css/', rep: '' },
+		{ src: 'jquery/dist/', rep: '' },
+		{ src: 'x-tag/dist/', rep: '' },
+		{ src: 'Polymer/', rep: '' },
+		{ src: 'webcomponents.js/', rep: '' },
+		{ src: '<p id="version">v0.0.0</p>', rep: 'v' + process.env.npm_package_version }
 	]
 };
 let i;
@@ -131,6 +138,6 @@ for (i in config.files) {
 	copy(config.files[i]);
 }
 
-for(i in config.replace) {
+for (i in config.replace) {
 	replace(config.replace[i], config.replace[i].patterns || config.patterns);
 }

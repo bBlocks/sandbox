@@ -7,10 +7,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Polymer v1.x</title>
 	<link href="../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-	<script src="../node_modules/webcomponents.js/webcomponents-lite.min.js"></script>
-	<link rel="import" href="../node_modules/Polymer/polymer-micro.html">
+	<link href="../style.css" rel="stylesheet">
 	<script src="../common.js" defer></script>
-	<link rel="import" href="app.html">
 </head>
 
 <body>
@@ -28,7 +26,7 @@
 			</div>
 		</div>
 	</nav>
-	<div class="container" role="main">
+	<div class="container" role="main" id="metricsContainer">
 		<h1 class="page-header">Polymer v1.x</h1>
 		<div class="container">
 			<form id="form" is="poly-form">
@@ -62,6 +60,8 @@
 			<p id="version">v0.0.0</p>
 		</footer>
 	</div>
-	
+	<script src="../node_modules/webcomponents.js/webcomponents-lite.min.js"></script>
+	<link rel="import" href="../node_modules/Polymer/polymer-micro.html">
+	<link rel="import" href="app.html">
 </body>
 </html>

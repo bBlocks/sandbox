@@ -1,3 +1,4 @@
+var domain = 'xtag'; // required for metrics
 // Form component
 var formComponent = xtag.register('x-form', {
 	extends: 'form',
@@ -13,7 +14,7 @@ var formComponent = xtag.register('x-form', {
 	events: {
 		submit: function (event) {
 			event.preventDefault();
-			startMeasure('render');
+	
 			// Get new parameters
 			var fields = this.querySelectorAll('input');
 			var newParams = {
@@ -21,6 +22,8 @@ var formComponent = xtag.register('x-form', {
 				pageSize: Number(fields[1].value),
 				currentPage: Number(fields[2].value)
 			};
+
+			startMeasure('render' + (newParams.pageSize*10));
 
 			// Update table
 			var event = new CustomEvent('update', { detail: newParams });
@@ -39,11 +42,7 @@ var tableComponent = xtag.register('x-table', {
 	events: {
 		update: function (event) {
 			var newParams = event.detail;
-			// Detect if we need to refresh data
-			if (!this.currentParams) { this.refreshTable(newParams); return; }
-			if (this.currentParams.itemsCount != newParams.itemsCount) { this.refreshTable(newParams); return; }
-			if (this.currentParams.pageSize != newParams.pageSize) { this.refreshTable(newParams); return; }
-			if (this.currentParams.currentPage != newParams.currentPage) { this.refreshTable(newParams); return; }
+			this.refreshTable(newParams);
 		}
 	},
 	methods: {
@@ -89,7 +88,7 @@ var tableComponent = xtag.register('x-table', {
 				this.tbody.appendChild(row);
 			}
 			this.thead.appendChild(headRow);
-			endMeasure('render', this);
+			endMeasure('render' + (i*j), this);
 		}
 	}
 });
@@ -108,5 +107,5 @@ var cellComponent = xtag.register('x-cell', {
 
 // Page logic
 var form = document.querySelector('#form');
-form.update(params);
+form.update(params); // Fails in IE11
 var table = document.querySelector('#table');

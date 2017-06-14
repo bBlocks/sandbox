@@ -1,3 +1,5 @@
+var domain = 'bblocks'; // required for metrics
+
 // Form component
 bb.helpers.defineElement = bb.helpers.registerElement; // enforce v0 spec polyfill
 var formComponent = bb.component({
@@ -40,11 +42,7 @@ var tableComponent = bb.component({
 	events: {
 		update: function (event) {
 			var newParams = event.detail;
-			// Detect if we need to refresh data
-			if (!this.currentParams) { this.refreshTable(newParams); return; }
-			if (this.currentParams.itemsCount != newParams.itemsCount) { this.refreshTable(newParams); return; }
-			if (this.currentParams.pageSize != newParams.pageSize) { this.refreshTable(newParams); return; }
-			if (this.currentParams.currentPage != newParams.currentPage) { this.refreshTable(newParams); return; }
+			this.refreshTable(newParams);
 		}
 	},
 	// Clear node
@@ -95,8 +93,8 @@ var tableComponent = bb.component({
 // Cell component
 var cellComponent = bb.component({
 	is: 'bb-cell',
-	attachedCallback: function () { // attachedCallback when we use v0 spec
-	//connectedCallback: function () { // connectedCallback for v1 spec
+	createdCallback: function () {},
+	attachedCallback: function () { 
 		var rowIndex = Number(this.getAttribute('row') || 0) + 1;
 		var columnIndex = this.getAttribute('col');
 		var isHead = this.getAttribute('head') != null;

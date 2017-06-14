@@ -1,13 +1,15 @@
+var domain = 'jquery'; // required for metrics
+
 // Form component
 $.fn.form = function (params) {
 	var $form = $(this),
 		form = $form[0],
 		fields = form.elements;
 
-	// Stop page reload when form submitted
+	// Handle submit
 	$form.on('submit', function () {
 		startMeasure('render'); 
-		event.preventDefault();
+		event.preventDefault(); // Stop page reload when form submitted
 
 		var newParams = {
 			itemsCount: Number(fields.itemsCount.value),
@@ -34,11 +36,7 @@ $.fn.table = function (params) {
 		currentParams = $.extend(null, params);
 
 	$table.on('update', function (event, newParams) {
-		// Detect if we need to refresh table with new data
-		if (!currentParams) {refreshTable(newParams);return;}
-		if (currentParams.itemsCount != newParams.itemsCount) {refreshTable(newParams);return;}
-		if (currentParams.pageSize != newParams.pageSize) {refreshTable(newParams);return;}
-		if (currentParams.currentPage != newParams.currentPage) {refreshTable(newParams);return;}
+		refreshTable(newParams);
 	});
 
 	// Get the data and render the table

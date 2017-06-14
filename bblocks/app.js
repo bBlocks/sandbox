@@ -1,3 +1,5 @@
+var domain = 'bblocks'; // required for metrics
+
 // Form component
 bb.helpers.defineElement = bb.helpers.registerElement; // enforce v0 spec polyfill
 var formComponent = bb.component({

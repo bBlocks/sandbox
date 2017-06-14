@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" manifest="../app.cache">
 
 <head>
 	<meta charset="utf-8">
@@ -7,6 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>bBlocks</title>
 	<link href="../lib/bootstrap.min.css" rel="stylesheet">
+	<link href="../style.css" rel="stylesheet">
 	<script src="component.polyfills.min.js" defer></script>
 	<script src="component.min.js" defer></script>
 	<script src="../common.js" defer></script>
@@ -28,7 +29,7 @@
 			</div>
 		</div>
 	</nav>
-	<div class="container" role="main">
+	<div class="container" role="main" id="metricsContainer">
 		<h1 class="page-header">bBlocks</h1>
 		<div class="container">
 			<form id="form" is="bb-form">
@@ -59,7 +60,7 @@
 			</table>
 		</div>
 		<footer class="footer">
-			<p id="version">v0.0.0</p>
+			v0.0.1
 		</footer>
 	</div>
 </body>

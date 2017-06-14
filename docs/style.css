@@ -1,0 +1,35 @@
+/* Styling results */
+body, #metricsContainer {
+	position:relative;
+}
+#metrics table {
+	font-size:12px;
+	margin:0px;
+}
+#metrics button {
+	position:absolute;
+	top:5px;
+	right:10px;
+}
+#metrics {
+
+	padding:0px;
+	position:absolute;
+	top:0;
+	left:0;
+	right:0;
+	z-index:1
+}
+#metricsContainer #metrics {
+	margin-top:-20px;
+}
+
+/* Results on home page */
+#metricsContainer.allMetrics #metrics {
+	position:relative;
+	margin-top:0px;
+}
+#metricsContainer.allMetrics #metrics button {
+	display:none;
+}
+
