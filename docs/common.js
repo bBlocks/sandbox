@@ -284,7 +284,7 @@ function load() {
 	setMetric('domInteractive', t.domInteractive - t.navigationStart);
 	setMetric('domContentLoaded', t.domContentLoadedEventStart - t.navigationStart);
 	setMetric('domComplete', t.domComplete - t.navigationStart);
-	codeSize();
+	//codeSize(); // collecting code size is not reliable
 
 	// Run test
 	if (location.search.indexOf('test') >= 0) {
