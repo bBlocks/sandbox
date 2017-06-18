@@ -94,8 +94,10 @@ function startMeasure(name) {
 function endMeasure(name, element) {
 	var height;
 	if (element) { height = element.clientHeight; } // make sure it is rendered
-	setMetric(name, performance.now() - metrics[domain][name].start, height);
-	if (typeof endTest == 'function') { endTest(); } // Only when collecting metrics
+	setTimeout(function() {
+		setMetric(name, performance.now() - metrics[domain][name].start, height);
+		if (name.indexOf('change')>=0 && typeof endTest == 'function') { endTest(); } // Only when collecting metrics
+	},0);
 };
 
 // 
@@ -174,6 +176,11 @@ function runTest() {
 	if (!btn) { throw 'Submit button not found'; }
 	var event = new MouseEvent('click')
 	btn.dispatchEvent(event);
+
+	btn = document.querySelector('#change');
+	if (!btn) { throw 'Change button not found'; }
+	var event = new MouseEvent('click')
+	btn.dispatchEvent(event);
 };
 
 // Load next solution from the list to run tests
@@ -210,34 +217,23 @@ function loadMetrics() {
 
 function codeSize() {
 	var size = 0;
-	if (performance.getEntries && false) {
+	if (performance.getEntries) {
 		var resources = performance.getEntries();
 		size = 0;
 		for (var i in resources) {
-
 			var resource = resources[i];
 			var arr = resource.name.split('/');
 			var fileName = arr[arr.length - 1];
-			console.log(resource);
 			if (fileName == 'index.html' || fileName == 'app.js' || fileName == 'app.html') {
+				if (!resource.transferSize) {size = -1;break;} // IE11 can't measure size
 				size += resource.transferSize;
 			}
 		}
 		
-	} else {
-		var scripts = document.scripts;
-		size = document.body.innerHTML.length;
-		for (var i =0 ;i<scripts.length; i++) {
-			var script = scripts[i];
-			var arr = script.src.split('/');
-			var fileName = arr[arr.length - 1];
-			console.log(i,fileName, script);
-			if (fileName == 'index.html' || fileName == 'app.js' || fileName == 'app.html') {
-				size += script.innerHTML.length;
-			}
-		}
+	} 
+	if (size>0) {
+		setMetric('codeSize',size, null,'bytes');
 	}
-	setMetric('codeSize',size,null,'bytes');
 }
 
 
@@ -291,7 +287,7 @@ function load() {
 	codeSize();
 
 	// Run test
-	if (location.search) {
+	if (location.search.indexOf('test') >= 0) {
 		setTimeout(function () {
 			runTest();
 		}, 100);

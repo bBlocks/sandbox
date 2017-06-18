@@ -2,7 +2,6 @@ console.log('start building');
 
 const fs = require('fs-extra');
 
-
 function replaceAll(search, replacement) {
 	var target = this;
 	return target.split(search).join(replacement);
@@ -90,8 +89,19 @@ var config = {
 		{
 			src: './style.css',
 			dist: './docs/style.css',
+		},
+		{
+			src: './node_modules/@bblocks/dom/dom.min.js',
+			dist: './docs/lib/dom.min.js',
+		},
+		{
+			src: './node_modules/@bblocks/component/component.polyfills.min.js',
+			dist: './docs/lib/component.polyfills.min.js',
+		},
+		{
+			src: './node_modules/@bblocks/component/component.min.js',
+			dist: './docs/lib/component.min.js',
 		}
-
 	],
 	replace: [
 		{
@@ -116,6 +126,8 @@ var config = {
 		{ src: 'bootstrap/dist/css/', rep: '' },
 		{ src: 'jquery/dist/', rep: '' },
 		{ src: 'x-tag/dist/', rep: '' },
+		{ src: '@bblocks/component/', rep: ''},
+		{ src: '@bblocks/dom/', rep: ''},
 		{ src: 'Polymer/', rep: '' },
 		{ src: 'webcomponents.js/', rep: '' },
 		{ src: '<p id="version">v0.0.0</p>', rep: 'v' + process.env.npm_package_version }

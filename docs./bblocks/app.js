@@ -5,14 +5,23 @@ var formComponent = bb.component(bb.dom, {
 	tag: 'form',
 	extends: HTMLFormElement,
 	is: 'bb-form',
+	currentParams: null,
 	update: function (params) {
 		var fields = this.find('input', true);
 		// Set field values
 		fields[0].value = params.itemsCount;
 		fields[1].value = params.pageSize;
 		fields[2].value = params.currentPage;
+		this.currentParams = params;
 	},
 	on: {
+		attach: function() {
+			// Handle change			
+			this.find('#change').addEventListener('click', function() {
+				startMeasure('change' + (form.currentParams.pageSize * window.params.maxColumns));
+				table.fire('change');
+			});			
+		},
 		submit: function (event) {
 			event.preventDefault();
 			
@@ -28,6 +37,8 @@ var formComponent = bb.component(bb.dom, {
 
 			// Update table
 			table.fire('update', newParams);
+
+			this.currentParams = newParams;
 		}
 	}
 });
@@ -44,6 +55,18 @@ var tableComponent = bb.component(bb.dom, {
 		update: function (event) {
 			var newParams = event.detail;
 			this.refreshTable(newParams);
+		},
+		change: function() {
+			var cells = this.find('bb-cell', true);
+			for(var i=0;i<cells.length;i++) {
+				var cell = cells[i];
+				var colIndex = Number(cell.getAttribute('col'));
+				if (colIndex) {
+					colIndex += 10;
+				}
+				cell.setAttribute('col', colIndex);
+			}
+			endMeasure('change' + (this.currentParams.pageSize*window.params.maxColumns), table);
 		}
 	},
 	// Get the data and render the table
@@ -91,11 +114,17 @@ var cellComponent = bb.component(bb.dom, {
 	is: 'bb-cell',
 	polyfill: 'v0',
 	createdCallback: null,
-	attachedCallback: function () { 
+	render: function() {
 		var rowIndex = Number(this.getAttribute('row') || 0) + 1;
 		var columnIndex = this.getAttribute('col');
 		var isHead = this.getAttribute('head') != null;
 		this.innerHTML = isHead ? headText(rowIndex, columnIndex) : cellText(rowIndex, columnIndex);
+	},
+	attributeChangedCallback: function() {
+		this.render();
+	},
+	attachedCallback: function () { 
+		this.render();
 	},
 });
 

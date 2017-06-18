@@ -22,6 +22,12 @@ $.fn.form = function (params) {
 		$('#table').trigger('update', newParams);
 	});
 
+	// Change
+	$form.find('#change').on('click', function() {
+		startMeasure('change' + (Number(fields.pageSize.value) * window.params.maxColumns));
+		$('#table').trigger('change');
+	});
+
 	// Set field values
 	fields.itemsCount.value = params.itemsCount;
 	fields.pageSize.value = params.pageSize;
@@ -39,6 +45,27 @@ $.fn.table = function (params) {
 
 	$table.on('update', function (event, newParams) {
 		refreshTable(newParams);
+	});
+
+	$table.on('change', function() {
+		var n = 0;
+		
+		$table.find('my-cell').each(function() {
+			n++;
+			var colIndex = Number($(this).attr('col'));
+			if (colIndex) {
+				colIndex += 10;
+			}			
+			// attributeChange is asynchronous
+			if (n >= currentParams.pageSize*window.params.maxColumns) {
+				$(this).on('render',measure);
+			}
+			$(this).attr('col', colIndex);
+		});
+
+		function measure() {
+			endMeasure('change' + (currentParams.pageSize*window.params.maxColumns), table);
+		}
 	});
 
 	// Get the data and render the table
@@ -63,18 +90,12 @@ $.fn.table = function (params) {
 			for (columnKey in data[i]) {
 				j++;
 				if (i == 0) { // Create table head
-					//$th = $('<th></th>');
 					$th = $('<th><my-cell row="' + i + '" col="'+j+'" head></my-cell></th>');
 					$th.find('my-cell').cell();
-					//$th.append($el);		
 					$headRow.append($th);
 				} 
-				//$td = $('<td>');
-				//var $el = $('<my-cell row="' + i + '" col="'+j+'"></my-cell>'); 
 				$td = $('<td><my-cell row="' + i + '" col="'+j+'"></my-cell></td>');
 				$td.find('my-cell').cell();
-				//$el.cell();
-				//$td.append($el); // Use cell component 
 				$row.append($td);
 			}
 			$tbody.append($row);
@@ -86,12 +107,33 @@ $.fn.table = function (params) {
 };
 
 // Cell component
+var observer = new MutationObserver(function(mutations) {
+  mutations.forEach(function(mutation) {
+    	if (mutation.type == 'attributes') {
+			if (typeof mutation.target.attributeChangeCallback == 'function') {
+				mutation.target.attributeChangeCallback(mutation.attributeName, mutation.value, mutation.oldValue, mutation);
+			}
+		} 
+  });    
+});
 $.fn.cell = function() {
 	var $el = this;
-	var rowIndex = Number($el.attr('row') || 0) + 1;
-	var columnIndex = Number($el.attr('col'));
-	var isHead = $el.attr('head') != null;
-	$el.html(isHead ? headText(rowIndex, columnIndex) : cellText(rowIndex, columnIndex));
+
+	function renderCell($el) {
+		var rowIndex = Number($el.attr('row') || 0) + 1;
+		var columnIndex = Number($el.attr('col'));
+		var isHead = $el.attr('head') != null;
+		$el.html(isHead ? headText(rowIndex, columnIndex) : cellText(rowIndex, columnIndex));
+		$el.trigger('render'); // Need for metrics
+	}
+
+	// Watch attribute change
+	observer.observe($el[0], {attributes: true});
+	$el[0].attributeChangeCallback = function() {
+		renderCell($(this));
+	}
+
+	renderCell($el);
 };
 
 // Page logic

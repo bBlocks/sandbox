@@ -1,13 +1,13 @@
 {
   "name": "sandbox",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "metrics": "cd node_modules/phantomas/bin/ && node phantomas.js --config=../../../phantomas.json >../../../metrics.json",
     "server": "http-server ../ -p 3000",
-	"build": "node build.js"
+    "build": "node build.js"
   },
   "repository": {
     "type": "git",
@@ -20,6 +20,8 @@
   },
   "homepage": "https://github.com/bBlocks/sandbox#readme",
   "dependencies": {
+    "@bblocks/component": "^0.1.0",
+    "@bblocks/dom": "^0.1.0",
     "Polymer": "^1.6.1--",
     "bootstrap": "^3.3.7",
     "jquery": "^3.2.1",

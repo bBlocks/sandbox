@@ -5,12 +5,14 @@ var domain = 'polymer'; // required for metrics
 var formComponent = Polymer({
 	is: 'poly-form',
 	extends: 'form',
+	currentParams: null,
 	update: function (params) {
 		var fields = this.querySelectorAll('input');
 		// Set field values
 		fields[0].value = params.itemsCount;
 		fields[1].value = params.pageSize;
 		fields[2].value = params.currentPage;
+		this.currentParams = params;
 	},
 	created: function () {
 		console.log('created', this);
@@ -24,7 +26,8 @@ var formComponent = Polymer({
 				pageSize: Number(fields[1].value),
 				currentPage: Number(fields[2].value)
 			};
-
+			this.currentParams =newParams;
+			
 			startMeasure('render' + (newParams.pageSize*window.params.maxColumns)); // Start measure redner X items
 
 			// Update table
@@ -32,6 +35,12 @@ var formComponent = Polymer({
 			var table = document.querySelector('#table');
 			table.dispatchEvent(event);
 		});
+
+		// Handle change			
+		this.querySelector('#change').addEventListener('click', function() {
+			startMeasure('change' + (form.currentParams.pageSize * window.params.maxColumns));
+			table.change();
+		});			
 	}
 });
 
@@ -92,24 +101,43 @@ var tableComponent = Polymer({
 		}
 		this.thead.appendChild(headRow);
 		endMeasure('render' + (i*window.params.maxColumns), this);
+	},
+	change: function() {
+		var cells = this.querySelectorAll('poly-cell', true);
+		for(var i=0;i<cells.length;i++) {
+			var cell = cells[i];
+			var colIndex = Number(cell.getAttribute('col'));
+			if (colIndex) {
+				colIndex += 10;
+			}
+			cell.setAttribute('col', colIndex);
+		}
+		endMeasure('change' + (this.currentParams.pageSize*window.params.maxColumns), table);
 	}
 });
 
 // Cell component
 var cellComponent = Polymer({
 	is: 'poly-cell',
-	attached: function () { 
+	render: function () { 
 		var rowIndex = Number(this.getAttribute('row') || 0) + 1;
 		var columnIndex = this.getAttribute('col');
 		var isHead = this.getAttribute('head') != null;
 		this.innerHTML = isHead ? headText(rowIndex, columnIndex) : cellText(rowIndex, columnIndex);
+	},
+	attached: function() {
+		this.render();
+	},
+	attributeChanged: function() {
+		this.render();
 	}
 });
 
 // Page logic
+var form, table;
 window.addEventListener('WebComponentsReady', function () {
-	var form = document.querySelector('#form');
+	form = document.querySelector('#form');
 	form.update(params);
-	var table = document.querySelector('#table');
+	table = document.querySelector('#table');
 });
 </script>

@@ -2,6 +2,7 @@ var domain = 'xtag'; // required for metrics
 // Form component
 var formComponent = xtag.register('x-form', {
 	extends: 'form',
+	currentParams: null,
 	methods: {
 		update: function (params) {
 			var fields = this.querySelectorAll('input');
@@ -9,6 +10,17 @@ var formComponent = xtag.register('x-form', {
 			fields[0].value = params.itemsCount;
 			fields[1].value = params.pageSize;
 			fields[2].value = params.currentPage;
+
+			this.currentParams = params;
+		}
+	},
+	lifecycle: {
+		inserted: function() {
+			// Handle change			
+			this.querySelector('#change').addEventListener('click', function() {
+				startMeasure('change' + (form.currentParams.pageSize * window.params.maxColumns));
+				xtag.fireEvent(table, 'change');
+			});			
 		}
 	},
 	events: {
@@ -23,12 +35,13 @@ var formComponent = xtag.register('x-form', {
 				currentPage: Number(fields[2].value)
 			};
 
+			this.currentParams = newParams;
+
 			startMeasure('render' + (newParams.pageSize*10));
 
 			// Update table
-			var event = new CustomEvent('update', { detail: newParams });
 			var table = document.querySelector('#table');
-			table.dispatchEvent(event);
+			xtag.fireEvent(table, 'update', { detail: newParams });
 		}
 	}
 });
@@ -40,6 +53,18 @@ var tableComponent = xtag.register('x-table', {
 	thead: null,
 	tbody: null,
 	events: {
+		change: function() {
+			var cells = this.querySelectorAll('x-cell');
+			for(var i=0;i<cells.length;i++) {
+				var cell = cells[i];
+				var colIndex = Number(cell.getAttribute('col'));
+				if (colIndex) {
+					colIndex += 10;
+				}
+				cell.setAttribute('col', colIndex);
+			}
+			endMeasure('change' + (this.currentParams.pageSize*window.params.maxColumns), table);
+		},
 		update: function (event) {
 			var newParams = event.detail;
 			this.refreshTable(newParams);
@@ -95,19 +120,28 @@ var tableComponent = xtag.register('x-table', {
 
 // Cell component
 var cellComponent = xtag.register('x-cell', {
-	lifecycle: {
-		inserted: function () { // we can use lifecycle methods directly
+	methods: {
+		render: function() {
 			var rowIndex = Number(this.getAttribute('row') || 0) + 1;
 			var columnIndex = this.getAttribute('col');
 			var isHead = this.getAttribute('head') != null;
 			this.innerHTML = isHead ? headText(rowIndex, columnIndex) : cellText(rowIndex, columnIndex);
 		}
+	},
+	lifecycle: {
+		attributeChanged: function() {
+			this.render();
+		},
+		inserted: function () {
+			this.render();
+		}
 	}
 });
 
 // Page logic
+var form, table;
 window.addEventListener('WebComponentsReady', function () {
-	var form = document.querySelector('#form');
+	form = document.querySelector('#form');
 	form.update(params); // Fails in IE11
-	var table = document.querySelector('#table');
+	table = document.querySelector('#table');
 });
