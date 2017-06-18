@@ -1,5 +1,5 @@
 <script>
-var domain = 'polymer1'; // required for metrics
+var domain = 'polymer'; // required for metrics
 
 // Form component
 var formComponent = Polymer({
@@ -16,7 +16,7 @@ var formComponent = Polymer({
 		console.log('created', this);
 		this.addEventListener('submit', function (event) {
 			event.preventDefault();
-			startMeasure('render');
+		
 			// Get new parameters
 			var fields = this.querySelectorAll('input');
 			var newParams = {
@@ -24,6 +24,8 @@ var formComponent = Polymer({
 				pageSize: Number(fields[1].value),
 				currentPage: Number(fields[2].value)
 			};
+
+			startMeasure('render' + (newParams.pageSize*window.params.maxColumns)); // Start measure redner X items
 
 			// Update table
 			var event = new CustomEvent('update', { detail: newParams });
@@ -79,17 +81,17 @@ var tableComponent = Polymer({
 				j++;
 				if (i == 0) { // Create table head
 					th = document.createElement('th');
-					th.innerHTML = '<poly-cell row="' + i + '" col="' + j + '" head></bb-cell>'; // Use cell component
+					th.innerHTML = '<poly-cell row="' + i + '" col="' + j + '" head></poly-cell>'; // Use cell component
 					headRow.appendChild(th);
 				}
 				td = document.createElement('td');
-				td.innerHTML = '<poly-cell row="' + i + '" col="' + j + '"></bb-cell>'; // Use cell component 
+				td.innerHTML = '<poly-cell row="' + i + '" col="' + j + '"></poly-cell>'; // Use cell component 
 				row.appendChild(td);
 			}
 			this.tbody.appendChild(row);
 		}
 		this.thead.appendChild(headRow);
-		endMeasure('render', this);
+		endMeasure('render' + (i*window.params.maxColumns), this);
 	}
 });
 

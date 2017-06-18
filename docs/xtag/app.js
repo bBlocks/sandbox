@@ -106,6 +106,8 @@ var cellComponent = xtag.register('x-cell', {
 });
 
 // Page logic
-var form = document.querySelector('#form');
-form.update(params); // Fails in IE11
-var table = document.querySelector('#table');
+window.addEventListener('WebComponentsReady', function () {
+	var form = document.querySelector('#form');
+	form.update(params); // Fails in IE11
+	var table = document.querySelector('#table');
+});

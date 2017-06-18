@@ -7,8 +7,7 @@ $.fn.form = function (params) {
 		fields = form.elements;
 
 	// Handle submit
-	$form.on('submit', function () {
-		startMeasure('render'); 
+	$form.on('submit', function (event) {
 		event.preventDefault(); // Stop page reload when form submitted
 
 		var newParams = {
@@ -16,6 +15,8 @@ $.fn.form = function (params) {
 			pageSize: Number(fields.pageSize.value),
 			currentPage: Number(fields.currentPage.value)
 		};
+
+		startMeasure('render' + (newParams.pageSize * window.params.maxColumns)); 
 
 		// Update table
 		$('#table').trigger('update', newParams);
@@ -25,6 +26,7 @@ $.fn.form = function (params) {
 	fields.itemsCount.value = params.itemsCount;
 	fields.pageSize.value = params.pageSize;
 	fields.currentPage.value = params.currentPage;
+
 };
 
 // Table component
@@ -48,7 +50,7 @@ $.fn.table = function (params) {
 
 	// Render table
 	function renderTable(data) {
-		var i, columnKey, j, $row, $td, $th, 
+		var i, columnKey, j, $row, $td, $th, $el, 
 			$headRow = $('<tr>');
 	
 	    // Clear table
@@ -61,27 +63,35 @@ $.fn.table = function (params) {
 			for (columnKey in data[i]) {
 				j++;
 				if (i == 0) { // Create table head
-					$th = $('<th>');
-					$th.cell(i+1, j, data[i][columnKey], true); // Use cell component
+					//$th = $('<th></th>');
+					$th = $('<th><my-cell row="' + i + '" col="'+j+'" head></my-cell></th>');
+					$th.find('my-cell').cell();
+					//$th.append($el);		
 					$headRow.append($th);
 				} 
-				$td = $('<td>');
-				$td.cell(i+1, j, data[i][columnKey], false); // Use cell component 
+				//$td = $('<td>');
+				//var $el = $('<my-cell row="' + i + '" col="'+j+'"></my-cell>'); 
+				$td = $('<td><my-cell row="' + i + '" col="'+j+'"></my-cell></td>');
+				$td.find('my-cell').cell();
+				//$el.cell();
+				//$td.append($el); // Use cell component 
 				$row.append($td);
 			}
 			$tbody.append($row);
 		};
 
 		$thead.append($headRow);
-		endMeasure('render', table);
+		endMeasure('render' + (i*window.params.maxColumns), table);
 	};
 };
 
 // Cell component
-$.fn.cell = function(rowIndex, columnIndex, data, isHead) {
-	var $span = $('<span>'); // Need to create a new DOM element to make it fare :)
-	$span.html(isHead ? headText(rowIndex, columnIndex, data) : cellText(rowIndex, columnIndex, data));
-	$(this).append($span);
+$.fn.cell = function() {
+	var $el = this;
+	var rowIndex = Number($el.attr('row') || 0) + 1;
+	var columnIndex = Number($el.attr('col'));
+	var isHead = $el.attr('head') != null;
+	$el.html(isHead ? headText(rowIndex, columnIndex) : cellText(rowIndex, columnIndex));
 };
 
 // Page logic

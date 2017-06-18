@@ -88,10 +88,6 @@ var config = {
 			dist: './docs/common.js',
 		},
 		{
-			src: './app.cache',
-			dist: './docs/app.cache',
-		},
-		{
 			src: './style.css',
 			dist: './docs/style.css',
 		}

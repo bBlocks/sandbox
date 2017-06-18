@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "metrics": "cd node_modules/phantomas/bin/ && node phantomas.js --config=../../../phantomas.json >../../../metrics.json",
-    "server": "http-server ./ -p 3000",
+    "server": "http-server ../ -p 3000",
 	"build": "node build.js"
   },
   "repository": {

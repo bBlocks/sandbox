@@ -1,54 +1,50 @@
 var domain = 'bblocks'; // required for metrics
 
 // Form component
-bb.helpers.defineElement = bb.helpers.registerElement; // enforce v0 spec polyfill
-var formComponent = bb.component({
+var formComponent = bb.component(bb.dom, {
 	tag: 'form',
+	extends: HTMLFormElement,
 	is: 'bb-form',
 	update: function (params) {
-		var fields = this.querySelectorAll('input');
+		var fields = this.find('input', true);
 		// Set field values
 		fields[0].value = params.itemsCount;
 		fields[1].value = params.pageSize;
 		fields[2].value = params.currentPage;
 	},
-	events: {
+	on: {
 		submit: function (event) {
 			event.preventDefault();
-			startMeasure('render');
+			
 			// Get new parameters
-			var fields = this.querySelectorAll('input');
+			var fields = this.find('input', true);
 			var newParams = {
 				itemsCount: Number(fields[0].value),
 				pageSize: Number(fields[1].value),
 				currentPage: Number(fields[2].value)
 			};
 
+			startMeasure('render' + (newParams.pageSize*window.params.maxColumns));
+
 			// Update table
-			var event = new CustomEvent('update', { detail: newParams });
-			var table = document.querySelector('#table');
-			table.dispatchEvent(event);
+			table.fire('update', newParams);
 		}
 	}
 });
 
 // Table component
-var tableComponent = bb.component({
+var tableComponent = bb.component(bb.dom, {
 	is: 'bb-table',
 	tag: 'table',
+	extends: HTMLTableElement,
 	currentParams: null,
 	thead: null,
 	tbody: null,
-	events: {
+	on: {
 		update: function (event) {
 			var newParams = event.detail;
 			this.refreshTable(newParams);
 		}
-	},
-	// Clear node
-	empty: function (element) {
-		element = element || this;
-		while (element.firstChild && element.firstChild.parentNode) { element.firstChild.parentNode.removeChild(element.firstChild); }
 	},
 	// Get the data and render the table
 	refreshTable: function (newParams) {
@@ -62,8 +58,8 @@ var tableComponent = bb.component({
 		var i, columnKey, j, row, td, th,
 			headRow = document.createElement('tr');
 
-		if (!this.thead) { this.thead = this.querySelector('thead'); }
-		if (!this.tbody) { this.tbody = this.querySelector('tbody'); }
+		if (!this.thead) { this.thead = this.find('thead'); }
+		if (!this.tbody) { this.tbody = this.find('tbody'); }
 
 		// Clear table
 		this.empty(this.tbody);
@@ -86,14 +82,15 @@ var tableComponent = bb.component({
 			this.tbody.appendChild(row);
 		}
 		this.thead.appendChild(headRow);
-		endMeasure('render', this);
+		endMeasure('render' + (i*window.params.maxColumns), this);
 	}
 });
 
 // Cell component
-var cellComponent = bb.component({
+var cellComponent = bb.component(bb.dom, {
 	is: 'bb-cell',
-	createdCallback: function () {},
+	polyfill: 'v0',
+	createdCallback: null,
 	attachedCallback: function () { 
 		var rowIndex = Number(this.getAttribute('row') || 0) + 1;
 		var columnIndex = this.getAttribute('col');

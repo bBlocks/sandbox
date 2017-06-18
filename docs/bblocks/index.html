@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" manifest="../app.cache">
+<html lang="en">
 
 <head>
 	<meta charset="utf-8">
@@ -8,8 +8,9 @@
 	<title>bBlocks</title>
 	<link href="../lib/bootstrap.min.css" rel="stylesheet">
 	<link href="../style.css" rel="stylesheet">
-	<script src="component.polyfills.min.js" defer></script>
-	<script src="component.min.js" defer></script>
+	<script src="../../component/component.polyfills.min.js" defer></script>
+	<script src="../../component/component.min.js" defer></script>
+	<script src="../../dom/dom.min.js" defer></script>
 	<script src="../common.js" defer></script>
 	<script src="app.js" defer></script>
 </head>
@@ -29,8 +30,9 @@
 			</div>
 		</div>
 	</nav>
-	<div class="container" role="main" id="metricsContainer">
+	<div class="container" role="main">
 		<h1 class="page-header">bBlocks</h1>
+		<div id="metricsContainer"></div>
 		<div class="container">
 			<form id="form" is="bb-form">
 				<div class="form-group">
@@ -60,6 +62,7 @@
 			</table>
 		</div>
 		<footer class="footer">
+			<hr>
 			v0.0.1
 		</footer>
 	</div>
