@@ -5,13 +5,12 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Polymer v1.x</title>
-	<link href="../lib/bootstrap.min.css" rel="stylesheet">
+	<title>Native Javascript</title>
+	<link href="../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 	<link href="../style.css" rel="stylesheet">
 	<script src="../common.js" defer></script>
-	<script src="../lib/webcomponents-lite.min.js" defer></script>
-	<link rel="import" href="../lib/polymer-micro.html">
-	<link rel="import" href="app.html">
+	<script src="../node_modules/custom-event-polyfill/custom-event-polyfill.js" defer></script>
+	<script src="app.js" defer></script>
 </head>
 
 <body>
@@ -21,9 +20,9 @@
 				<a class="navbar-brand" href="../index.html">Sandbox</a>			
 				<ul class="nav navbar-nav">
 					<li><a href="../index.html">Home</a></li>
-					<li><a href="../js/index.html">JS</a></li>
-					<li><a href="../jquery/index.html">JQuery</a></li>
-					<li class="active"><a href="javascript:void(0)">Polymer 1.x</a></li>
+					<li class="active"><a href="index.html">JS</a></li>
+					<li><a hreef="../js/index.html">JQuery</a></li>
+					<li><a href="../polymer/index.html">Polymer 1.x</a></li>
 					<li><a href="../xtag/index.html">X-Tag</a></li>
 					<li><a href="../bblocks/index.html">bBlocks</a></li>
 				</ul>
@@ -31,10 +30,10 @@
 		</div>
 	</nav>
 	<div class="container" role="main">
-		<h1 class="page-header">Polymer v1.x</h1>
+		<h1 class="page-header">Native Javascript</h1>
 		<div id="metricsContainer"></div>
 		<div class="container">
-			<form id="form" is="poly-form">
+			<form id="form">
 				<div class="form-group">
 					<label>Items count</label>
 					<input type="number" class="form-control" name="itemsCount" min="1" max="999999" value="1500" />
@@ -55,7 +54,7 @@
 		</div>
 		<br><br>
 		<div class="container">
-			<table class="table" id="table" is="poly-table">
+			<table class="table" id="table">
 				<thead>
 				</thead>
 				<tbody>
@@ -64,9 +63,8 @@
 		</div>
 		<footer class="footer">
 			<hr>
-			v0.1.0
+			<p id="version">v0.0.0</p>
 		</footer>
 	</div>
-	
 </body>
 </html>

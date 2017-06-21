@@ -24,6 +24,7 @@
     "@bblocks/dom": "^0.1.0",
     "Polymer": "^1.6.1--",
     "bootstrap": "^3.3.7",
+    "custom-event-polyfill": "^0.3.0",
     "jquery": "^3.2.1",
     "webcomponents.js": "^0.7.24",
     "x-tag": "^1.5.11"

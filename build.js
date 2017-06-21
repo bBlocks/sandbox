@@ -101,6 +101,14 @@ var config = {
 		{
 			src: './node_modules/@bblocks/component/component.min.js',
 			dist: './docs/lib/component.min.js',
+		},
+		{ // JS
+			src: './node_modules/custom-event-polyfill/custom-event-polyfill.js',
+			dist: './docs/lib/custom-event-polyfill.js'
+		},
+		{
+			src: './js/',
+			dist: './docs/js',
 		}
 	],
 	replace: [
@@ -118,6 +126,9 @@ var config = {
 		},
 		{
 			src: './docs/index.html',
+		},
+		{
+			src: './docs/js/index.html'
 		}
 	],
 	patterns: [
@@ -130,12 +141,14 @@ var config = {
 		{ src: '@bblocks/dom/', rep: ''},
 		{ src: 'Polymer/', rep: '' },
 		{ src: 'webcomponents.js/', rep: '' },
+		{ src: 'custom-event-polyfill/', rep: ''},
 		{ src: '<p id="version">v0.0.0</p>', rep: 'v' + process.env.npm_package_version }
 	]
 };
 let i;
 fs.removeSync('./docs');
 fs.ensureDirSync('./docs');
+fs.ensureDirSync('./docs/js');
 fs.ensureDirSync('./docs/jquery');
 fs.ensureDirSync('./docs/lib');
 fs.ensureDirSync('./docs/polymer');

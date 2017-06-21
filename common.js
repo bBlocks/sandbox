@@ -10,10 +10,11 @@ var params = {
 };
 
 // List of solutions
-var solutions = ['jquery', 'polymer', 'xtag', 'bblocks'];
+var solutions = ['js', 'jquery', 'polymer', 'xtag', 'bblocks'];
 
 // Generate JSON data like [{column1: 'Cell 1 1', column2: 'Cell 1 2', ...}, ...]
 function generateData(currentPage, pageSize, itemsCount, startColumn, endColumn, maxColumns) {
+	console.log('generate', arguments);
 	var row, i, j,
 		data = [],
 		maxColumns = maxColumns || (params.maxColumns || 10);
@@ -30,7 +31,7 @@ function generateData(currentPage, pageSize, itemsCount, startColumn, endColumn,
 		if (i > itemsCount) { break; }
 		row = {};
 		for (j = startColumn; j <= endColumn; j++) {
-			row['column' + j] = 'Cell ' + i + ',' + j;
+			row['column' + j] = {row: i-1, col: j};
 		}
 		data.push(row);
 	}
@@ -93,11 +94,17 @@ function startMeasure(name) {
 // End measurement of a metric
 function endMeasure(name, element) {
 	var height;
-	if (element) { height = element.clientHeight; } // make sure it is rendered
-	setTimeout(function() {
-		setMetric(name, performance.now() - metrics[domain][name].start, height);
+	
+	if (element) { // Wait till browser finish rendering
+		height = element.clientHeight; 
+		setTimeout(function() {
+			setMetric(name, performance.now() - metrics[domain][name].start, height);
+			if (name.indexOf('change')>=0 && typeof endTest == 'function') { endTest(); } // Only when collecting metrics
+		},0);
+	} else {
+		setMetric(name, performance.now() - metrics[domain][name].start);
 		if (name.indexOf('change')>=0 && typeof endTest == 'function') { endTest(); } // Only when collecting metrics
-	},0);
+	}
 };
 
 // 

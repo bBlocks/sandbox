@@ -73,7 +73,7 @@ var tableComponent = Polymer({
 	},
 	// Render table
 	renderTable: function (data) {
-		var i, columnKey, j, row, td, th,
+		var i, columnKey, row, td, th,
 			headRow = document.createElement('tr');
 
 		if (!this.thead) { this.thead = this.querySelector('thead'); }
@@ -87,14 +87,14 @@ var tableComponent = Polymer({
 			row = document.createElement('tr');
 			j = 0;
 			for (columnKey in data[i]) {
-				j++;
+				var field = data[i][columnKey];
 				if (i == 0) { // Create table head
 					th = document.createElement('th');
-					th.innerHTML = '<poly-cell row="' + i + '" col="' + j + '" head></poly-cell>'; // Use cell component
+					th.innerHTML = '<poly-cell row="' + field.row + '" col="' +field.col + '" head></poly-cell>'; // Use cell component
 					headRow.appendChild(th);
 				}
 				td = document.createElement('td');
-				td.innerHTML = '<poly-cell row="' + i + '" col="' + j + '"></poly-cell>'; // Use cell component 
+				td.innerHTML = '<poly-cell row="' + field.row + '" col="' + field.col + '"></poly-cell>'; // Use cell component 
 				row.appendChild(td);
 			}
 			this.tbody.appendChild(row);
