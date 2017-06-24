@@ -58,7 +58,7 @@ $.fn.table = function (params) {
 			}
 			// attributeChange is asynchronous
 			if (n >= (currentParams.pageSize * window.params.maxColumns + + window.params.maxColumns)) {
-				$(this).on('render', measure);
+				$(this)[0].onRender =  measure;
 			}
 			$(this).attr('col', colIndex);
 		});
@@ -125,7 +125,9 @@ $.fn.cell = function () {
 		var columnIndex = Number($el.attr('col'));
 		var isHead = $el.attr('head') != null;
 		$el.html(isHead ? headText(rowIndex, columnIndex) : cellText(rowIndex, columnIndex));
-		$el.trigger('render'); // Need for metrics
+		if (typeof $el[0].onRender == 'function') {
+			$el[0].onRender();
+		}
 	}
 
 	// Watch attribute change
