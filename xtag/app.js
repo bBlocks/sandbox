@@ -142,6 +142,6 @@ var cellComponent = xtag.register('x-cell', {
 var form, table;
 window.addEventListener('WebComponentsReady', function () {
 	form = document.querySelector('#form');
-	form.update(params); // Fails in IE11
+	form.update(params);
 	table = document.querySelector('#table');
 });
