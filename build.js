@@ -109,7 +109,7 @@ var config = {
 		{
 			src: './js/',
 			dist: './docs/js',
-		}
+		},
 	],
 	replace: [
 		{
@@ -129,6 +129,9 @@ var config = {
 		},
 		{
 			src: './docs/js/index.html'
+		},
+		{
+			src: './docs/common.js'
 		}
 	],
 	patterns: [
@@ -142,7 +145,8 @@ var config = {
 		{ src: 'Polymer/', rep: '' },
 		{ src: 'webcomponents.js/', rep: '' },
 		{ src: 'custom-event-polyfill/', rep: ''},
-		{ src: '<p id="version">v0.0.0</p>', rep: 'v' + process.env.npm_package_version }
+		{ src: '<p id="version">v0.0.0</p>', rep: 'v' + process.env.npm_package_version },
+		{ src: 'bootstrap/dist/css/', rep: 'lib/'}
 	]
 };
 let i;
