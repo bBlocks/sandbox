@@ -1,5 +1,5 @@
 {
-    "url":	"http://localhost:3000/jquery/index.html",
+    "url":	"https://bblocks.github.io/sandbox/jquery/index.html",
     "progress": true,
     "modules": "windowPerformance,timeToFirst,domComplexity,assetsTypes",
 	"reporter": "json:pretty"

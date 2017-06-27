@@ -1,7 +1,29 @@
 # sandbox
 
-<<<<<<< HEAD
+Building efficient components for Web applications.
+
 [Jump to Intro](//github.com/bBlocks/sandbox/wiki/Intro) / [Jump to demo](//bblocks.github.io/sandbox/)
-=======
-[Jump to Intro](//github.com/bBlocks/sandbox/wiki/Intro) / [Jump to demo](//bblocks.github.io/sandbox/)
->>>>>>> 56653749968dc4175425c37087ea2095657bbfa9
+
+!(https://github.com/bBlocks/sandbox/blob/master/ftEvolution.png)
+
+# Setting up locally
+
+```javascript
+npm install 
+```
+
+# Run locally
+
+```javascript
+npm run server 
+```
+Open [http://localhost:3000/index.html](http://localhost:3000/index.html)
+
+# Building
+
+```javascript
+npm run build 
+```
+
+
+
