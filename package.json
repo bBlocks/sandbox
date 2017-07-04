@@ -21,7 +21,7 @@
   "dependencies": {
     "@bblocks/component": "^0.1.0",
     "@bblocks/dom": "^0.1.0",
-    "Polymer": "^1.6.1--",
+    "Polymer": "1.9.1",
     "bootstrap": "^3.3.7",
     "custom-event-polyfill": "^0.3.0",
     "jquery": "^3.2.1",

@@ -20,6 +20,7 @@ function replace(file, patterns) {
 			if (cfg.reg) {
 				search = new RegExp(cfg.reg, 'ig');
 				result = result.replace(search, cfg.rep);
+				console.log(cfg.reg);
 			} else {
 				search = cfg.src;
 				result = replaceAll.call(result, search, cfg.rep);
@@ -63,7 +64,7 @@ var config = {
 			dist: './docs/lib/webcomponents-lite.min.js'
 		},
 		{
-			src: './node_modules/Polymer/polymer-micro.html',
+			src: 'polymer-micro.html',
 			dist: './docs/lib/polymer-micro.html'
 		},
 		{
@@ -145,7 +146,7 @@ var config = {
 		{ src: 'Polymer/', rep: '' },
 		{ src: 'webcomponents.js/', rep: '' },
 		{ src: 'custom-event-polyfill/', rep: ''},
-		{ src: '<p id="version">v0.0.0</p>', rep: 'v' + process.env.npm_package_version },
+		{ src: 'v0.0.0', rep: 'v' + process.env.npm_package_version},
 		{ src: 'bootstrap/dist/css/', rep: 'lib/'}
 	]
 };
