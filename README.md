@@ -4,7 +4,7 @@ Building efficient components for Web applications.
 
 [Jump to Intro](//github.com/bBlocks/sandbox/wiki/Intro) / [Jump to demo](//bblocks.github.io/sandbox/)
 
-!(https://github.com/bBlocks/sandbox/blob/master/ftEvolution.png)
+![Front-end developer evolution](https://github.com/bBlocks/sandbox/blob/master/ftEvolution.png)
 
 # Setting up locally
 
@@ -24,6 +24,4 @@ Open [http://localhost:3000/index.html](http://localhost:3000/index.html)
 ```javascript
 npm run build 
 ```
-
-
-
+Verify [http://localhost:3000/docs/index.html](http://localhost:3000/docs/index.html
