@@ -103,11 +103,11 @@ var tableComponent = xtag.register('x-table', {
 					j++;
 					if (i == 0) { // Create table head
 						th = document.createElement('th');
-						th.innerHTML = '<x-cell row="' + i + '" col="' + j + '" head></bb-cell>'; // Use cell component
+						th.innerHTML = '<x-cell row="' + i + '" col="' + j + '" head></x-cell>'; // Use cell component
 						headRow.appendChild(th);
 					}
 					td = document.createElement('td');
-					td.innerHTML = '<x-cell row="' + i + '" col="' + j + '"></bb-cell>'; // Use cell component 
+					td.innerHTML = '<x-cell row="' + i + '" col="' + j + '"></x-cell>'; // Use cell component 
 					row.appendChild(td);
 				}
 				this.tbody.appendChild(row);
